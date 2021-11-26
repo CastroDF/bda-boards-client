@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Login } from "components/routes";
+import { Login, Boards } from "components/routes";
 
 const Routes = () => {
   return (
@@ -9,6 +9,9 @@ const Routes = () => {
       <Redirect exact from="/" to="/login" />
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/boards">
+        <Boards />
       </Route>
     </Switch>
   );
