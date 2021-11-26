@@ -6,7 +6,7 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: #333333;
+  background-color: black;
 
   form {
     display: flex;
