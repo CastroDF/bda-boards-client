@@ -15,12 +15,15 @@ const SignUp = () => {
   } = useForm();
   const onSubmit = async (values) => {
     const loggedUser = await Axios.post(
-      "http://localhost:5000/users",
+      "users",
       {
         username: values.username,
         password: values.password,
       },
-      { headers: { "Access-Control-Allow-Origin": "*" } }
+      {
+        baseURL: process.env.REACT_APP_BACKEND_URL_PORT,
+        headers: { "Access-Control-Allow-Origin": "*" },
+      }
     );
 
     if (loggedUser) {

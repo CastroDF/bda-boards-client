@@ -17,12 +17,15 @@ const Login = () => {
   const onSubmit = async (values) => {
     try {
       const loggedUser = await Axios.post(
-        "http://localhost:5000/users/login",
+        "users/login",
         {
           username: values.username,
           password: values.password,
         },
-        { headers: { "Access-Control-Allow-Origin": "*" } }
+        {
+          baseURL: process.env.REACT_APP_BACKEND_URL_PORT,
+          headers: { "Access-Control-Allow-Origin": "*" },
+        }
       );
       if (loggedUser && !loggedUser.error) {
         history.push("/boards");

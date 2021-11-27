@@ -16,7 +16,8 @@ const Login = () => {
     const getStudents = async () => {
       try {
         setIsLoading(true);
-        const response = await Axios.get("http://localhost:5000/students", {
+        const response = await Axios.get("students", {
+          baseURL: process.env.REACT_APP_BACKEND_URL_PORT,
           headers: { "Access-Control-Allow-Origin": "*" },
         });
         setStudents(response.data.data);
