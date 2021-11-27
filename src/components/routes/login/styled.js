@@ -21,6 +21,12 @@ const Container = styled.section`
       box-sizing: border-box;
     }
 
+    .userNotFoud {
+      font-family: var(--secondary-font);
+      font-size: 16px;
+      color: ${ColorsPalette.white};
+    }
+
     .rowInput {
       position: relative;
       display: flex;

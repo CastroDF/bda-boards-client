@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Axios from "axios";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import LoginSection from "./styled";
 
 const Login = () => {
+  const [error, setError] = useState("");
   const history = useHistory();
   const {
     register,
@@ -14,25 +15,32 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (values) => {
-    const loggedUser = await Axios.post(
-      "http://localhost:5000/users/login",
-      {
-        username: values.username,
-        password: values.password,
-      },
-      { headers: { "Access-Control-Allow-Origin": "*" } }
-    );
-
-    if (loggedUser) {
-      history.push("/boards");
-    } else {
-      console.error("User not exists");
+    try {
+      const loggedUser = await Axios.post(
+        "http://localhost:5000/users/login",
+        {
+          username: values.username,
+          password: values.password,
+        },
+        { headers: { "Access-Control-Allow-Origin": "*" } }
+      );
+      if (loggedUser && !loggedUser.error) {
+        history.push("/boards");
+        setError("");
+      }
+    } catch (error) {
+      setError(error);
     }
   };
 
   return (
     <LoginSection>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {error && (
+          <div className="userNotFoud">
+            Invalid credentials. Please try again.
+          </div>
+        )}
         <div className="rowInput">
           <input
             type="text"
