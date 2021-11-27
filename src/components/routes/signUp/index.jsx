@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
-import LoginSection from "./styled";
+import SignUpSection from "./styled";
 
-const Login = () => {
+const SignUp = () => {
   const history = useHistory();
   const {
     register,
@@ -15,7 +15,7 @@ const Login = () => {
   } = useForm();
   const onSubmit = async (values) => {
     const loggedUser = await Axios.post(
-      "http://localhost:5000/users/login",
+      "http://localhost:5000/users",
       {
         username: values.username,
         password: values.password,
@@ -26,12 +26,12 @@ const Login = () => {
     if (loggedUser) {
       history.push("/boards");
     } else {
-      console.error("User not exists");
+      console.error("Error creating user");
     }
   };
 
   return (
-    <LoginSection>
+    <SignUpSection>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="rowInput">
           <input
@@ -63,15 +63,15 @@ const Login = () => {
         </div>
         <input
           type="submit"
-          value="Login"
+          value="SignUp"
           disabled={!!errors.username || !!errors.password}
         />
       </form>
       <p>
-        Don&apos;t have an account? <Link to="signUp"> Signup here</Link>
+        Already have an account? <Link to="login"> Login here</Link>
       </p>
-    </LoginSection>
+    </SignUpSection>
   );
 };
 
-export default Login;
+export default SignUp;
