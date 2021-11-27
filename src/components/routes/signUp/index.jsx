@@ -24,7 +24,7 @@ const SignUp = () => {
     );
 
     if (loggedUser) {
-      history.push("/boards");
+      history.push("/login");
     } else {
       console.error("Error creating user");
     }

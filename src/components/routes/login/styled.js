@@ -61,6 +61,7 @@ const Container = styled.section`
       background-color: ${ColorsPalette.emerald};
       border: none;
       border-radius: 20px;
+      cursor: pointer;
     }
 
     & > input[type="submit"]:disabled {
